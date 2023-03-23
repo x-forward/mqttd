@@ -1,0 +1,20 @@
+[package]
+name = "dlink"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+  "gateway",
+  "broker",
+  "transport",
+  "packet",
+  "config",
+]
+
+[dependencies]
+gateway = { path = "./gateway" }
+broker = { path = "./broker" }
+transport = { path = "./transport" }
+packet = { path = "./packet" }
+config = { path = "./config"}
