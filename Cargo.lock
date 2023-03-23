@@ -37,6 +37,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "codec"
+version = "0.1.0"
+
+[[package]]
 name = "config"
 version = "0.1.0"
 
@@ -45,10 +49,13 @@ name = "dlink"
 version = "0.1.0"
 dependencies = [
  "broker",
+ "codec",
  "config",
  "gateway",
- "packet",
- "transport",
+ "listener",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -75,6 +82,10 @@ name = "libc"
 version = "0.2.140"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "99227334921fae1a979cf0bfdfcc6b3e5ce376ef57e16fb6fb3ea2ed6095f80c"
+
+[[package]]
+name = "listener"
+version = "0.1.0"
 
 [[package]]
 name = "lock_api"
@@ -144,10 +155,6 @@ name = "overload"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
-
-[[package]]
-name = "packet"
-version = "0.1.0"
 
 [[package]]
 name = "parking_lot"
@@ -354,10 +361,6 @@ dependencies = [
  "tracing-core",
  "tracing-log",
 ]
-
-[[package]]
-name = "transport"
-version = "0.1.0"
 
 [[package]]
 name = "unicode-ident"

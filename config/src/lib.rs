@@ -3,7 +3,7 @@ pub mod server;
 use server::Server;
 #[derive(Debug)]
 pub struct Config {
-    server: Server,
+    pub server: Server,
 }
 
 impl Config {

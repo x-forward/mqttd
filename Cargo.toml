@@ -7,14 +7,18 @@ edition = "2021"
 members = [
   "gateway",
   "broker",
-  "transport",
-  "packet",
+  "listener",
+  "codec",
   "config",
 ]
 
 [dependencies]
 gateway = { path = "./gateway" }
 broker = { path = "./broker" }
-transport = { path = "./transport" }
-packet = { path = "./packet" }
+listener = { path = "./listener" }
+codec = { path = "./codec" }
 config = { path = "./config"}
+
+tokio = { version = "1.26.0", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
