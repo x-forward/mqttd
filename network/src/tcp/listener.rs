@@ -39,7 +39,6 @@ pub async fn run(
     shutdown_complete_tx: mpsc::Sender<()>,
     shutdown_complete_rx: &mut mpsc::Receiver<()>,
 ) {
-    // @todo listener fatcory
     let mut tcp_server = new(
         listener,
         notify_shutdown,
