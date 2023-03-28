@@ -5,19 +5,20 @@ edition = "2021"
 
 [workspace]
 members = [
-  "gateway",
   "broker",
   "network",
-  "codec",
   "config",
+  "packet",
+  "codec",
 ]
 
 [dependencies]
-gateway = { path = "./gateway" }
 broker = { path = "./broker" }
 network = { path = "./network" }
 codec = { path = "./codec" }
 config = { path = "./config"}
+packet = {path = "./packet"}
+
 
 tokio = { version = "1.26.0", features = ["full"] }
 tracing = "0.1"
