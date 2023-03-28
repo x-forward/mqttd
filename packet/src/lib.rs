@@ -1,14 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use std::error::Error;
+
+use codec::frame::Frame;
+#[derive(Debug)]
+pub struct Connect {}
+
+#[derive(Debug)]
+pub enum Command {
+    Connect(Connect),
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+impl Command {
+    pub fn from_frame(_frame: Frame) -> Result<Command, Box<dyn Error>> {
+        todo!()
+    }
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    pub async fn apply() -> Result<Command, Box<dyn Error>> {
+        todo!()
     }
 }
