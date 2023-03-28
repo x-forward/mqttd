@@ -1,4 +1,3 @@
-// use crate::codec::Codec;
 use crate::tcp::codec;
 use crate::tcp::connection::Connection;
 use crate::tcp::shutdown::Shutdown;
@@ -8,8 +7,6 @@ use std::sync::Arc;
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{broadcast, mpsc, Semaphore};
 use tracing::{error, info};
-
-use super::shutdown;
 
 pub struct Listener {
     pub listener: TcpListener,
