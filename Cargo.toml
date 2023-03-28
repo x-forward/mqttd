@@ -7,7 +7,7 @@ edition = "2021"
 members = [
   "gateway",
   "broker",
-  "listener",
+  "network",
   "codec",
   "config",
 ]
@@ -15,7 +15,7 @@ members = [
 [dependencies]
 gateway = { path = "./gateway" }
 broker = { path = "./broker" }
-listener = { path = "./listener" }
+network = { path = "./network" }
 codec = { path = "./codec" }
 config = { path = "./config"}
 

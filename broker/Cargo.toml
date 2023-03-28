@@ -6,7 +6,7 @@ edition = "2021"
 [workerspace]
 members = [
     "config",
-    "listener"
+    "network"
 ]
 
 [dependencies]
@@ -14,4 +14,4 @@ tokio = { version = "1.26.0", features = ["full"] }
 tracing = "0.1"
 tracing-subscriber = "0.3"
 config = { path = "../config" }
-listener = { path = "../listener" }
+network = { path = "../network" }

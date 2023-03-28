@@ -6,11 +6,11 @@ impl Listener for Tcp {
         todo!()
     }
 
-    fn serve(&self) -> Result<(), Box<dyn std::error::Error>> {
+    fn serve(&self) {
         todo!()
     }
 
-    fn name(&self) -> &'static str {
+    fn name(&self) {
         todo!()
     }
 }
