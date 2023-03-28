@@ -1,5 +1,5 @@
 // use crate::codec::Codec;
-use crate::tcp::codec::Codec;
+use crate::tcp::codec;
 use crate::tcp::connection::Connection;
 use crate::tcp::shutdown::Shutdown;
 use std::error::Error;
@@ -8,6 +8,8 @@ use std::sync::Arc;
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{broadcast, mpsc, Semaphore};
 use tracing::{error, info};
+
+use super::shutdown;
 
 pub struct Listener {
     pub listener: TcpListener,
@@ -30,10 +32,13 @@ pub fn new(
     }
 }
 
-pub async fn run(listener: TcpListener, shutdown: impl Future) {
-    let (notify_shutdown, _) = broadcast::channel(1);
-    let (shutdown_complete_tx, mut shutdown_complete_rx) = mpsc::channel(1);
-
+pub async fn run(
+    listener: TcpListener,
+    shutdown: impl Future,
+    notify_shutdown: broadcast::Sender<()>,
+    shutdown_complete_tx: mpsc::Sender<()>,
+    shutdown_complete_rx: &mut mpsc::Receiver<()>,
+) {
     // @todo listener fatcory
     let mut tcp_server = new(
         listener,
@@ -73,15 +78,16 @@ impl Listener {
                 .acquire_owned()
                 .await
                 .unwrap();
+
             let socket = self.accept().await?;
 
-            let mut codec = Codec {
-                connection: Connection::new(socket),
-                shutdown: Shutdown::new(self.notify_shutdown.subscribe()),
-                // _shutdown_complete: self.shutdown_complete_tx.clone(),
-            };
+            let mut c = codec::new(
+                Connection::new(socket),
+                Shutdown::new(self.notify_shutdown.subscribe()),
+            );
+
             tokio::spawn(async move {
-                if let Err(err) = codec.run().await {
+                if let Err(err) = c.run().await {
                     error!(cause = ?err, "connection error");
                 }
                 drop(permit)

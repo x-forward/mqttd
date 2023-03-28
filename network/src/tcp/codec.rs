@@ -8,14 +8,14 @@ pub struct Codec {
     pub shutdown: Shutdown,
 }
 
-impl Codec {
-    pub fn new(connection: Connection, shutdown: Shutdown) -> Codec {
-        Codec {
-            connection: connection,
-            shutdown: shutdown,
-        }
+pub fn new(connection: Connection, shutdown: Shutdown) -> Codec {
+    Codec {
+        connection: connection,
+        shutdown: shutdown,
     }
+}
 
+impl Codec {
     #[instrument(skip(self))]
     pub async fn run(&mut self) -> Result<(), Error> {
         while !self.shutdown.is_shutdown() {
